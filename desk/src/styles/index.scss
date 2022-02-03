@@ -1,12 +1,11 @@
 @import url('../../public/tools/normalize.min.css');
-@import url('../../public/fonts/fonts.css');
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 }
 :root {
-	--font-main: 'Mont', 'Montserrat', Arial, Helvetica, sans-serif;
+	--font-main: 'Montserrat', Arial, Helvetica, sans-serif;
 	--font-size: clamp(80px, 15vw, 200px);
 	--color-main: #162c35;
 	--color-white: #f6f6f6;
@@ -25,7 +24,7 @@ section {
 	justify-content: center;
 	align-items: center;
 	background: url('../../public/cityscape02.jpg');
-	background-position: center center;
+	background-position: center;
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
@@ -49,28 +48,46 @@ section {
 		background-attachment: fixed;
 	}
 	.box:nth-child(1) {
-		filter: blur(12px);
+		filter: blur(10px);
 	}
 	.box:nth-child(2) {
-		clip-path: circle(clamp(100px, 11.53vw, 150px) at var(--x) var(--y));
-		transition: all 1s cubic-bezier(0.1, 0.69, 0.36, 0.98);
+		filter: blur(10px);
+		clip-path: circle(0px at 0 0);
+	}
+	.box:nth-child(2).appearing {
+		filter: blur(0px);
+		clip-path: circle(clamp(100px, 11.5vw, 150px) at var(--x) var(--y));
+		transition: clip-path 1s cubic-bezier(0.1, 0.69, 0.36, 0.98);
 	}
 	h2 {
 		position: absolute;
 		font-size: var(--font-size);
 		font-weight: bold;
-		transform: translate(calc(var(--x) / 60), calc(var(--y) / 60));
+		transform: translate(calc(var(--x) / 50), calc(var(--y) / 50));
 		transition: all 1s cubic-bezier(0.1, 0.69, 0.36, 0.98);
+		cursor: pointer;
 	}
 	.circle {
+		filter: blur(4px);
 		position: absolute;
-		top: clamp(-150px, -11.53vw, -100px);
-		left: clamp(-150px, -11.53vw, -100px);
-		width: clamp(200px, 23.07vw, 300px);
-		height: clamp(200px, 23.07vw, 300px);
+		top: 0;
+		left: 0;
+		width: 0;
+		height: 0;
+		border: 1px solid rgba(#fff, 0.1);
+		border-radius: 100%;
+		pointer-events: none;
+	}
+	.circle.appearing {
+		filter: blur(0px);
+		position: absolute;
+		top: clamp(-150px, -11.5vw, -100px);
+		left: clamp(-150px, -11.5vw, -100px);
+		width: clamp(200px, 23vw, 300px);
+		height: clamp(200px, 23vw, 300px);
 		border: 1px solid var(--color-white);
 		border-radius: 100%;
-		box-shadow: 0 5px 25px rgba($color: #000, $alpha: 0.25);
+		box-shadow: 0 5px 25px rgba(#000, 0.25);
 		transform: translate(var(--x), var(--y));
 		transition: all 1s cubic-bezier(0.1, 0.69, 0.36, 0.98);
 	}
